@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"/><title>Pay Bill</title></head>
+<body>
+  <h1>Pay Bill</h1>
+  <label>Biller:
+    <select id="biller">
+      <option>Adani Power</option>
+      <option>Tata Power</option>
+    </select>
+  </label><br/><br/>
+  <label>Amount: ₹ <input id="amount" type="number" /></label><br/><br/>
+  <button id="payBtn">Pay</button>
+  <div id="msg"></div>
+
+  <script>
+    document.getElementById('payBtn').addEventListener('click', ()=>{
+      const amt = Number(document.getElementById('amount').value||0);
+      if(amt <= 0){ document.getElementById('msg').innerText = 'Enter an amount > 0'; return; }
+      // final confirmation (simulate critical step)
+      if(confirm('Confirm Pay ₹'+amt+'?')) {
+        document.getElementById('msg').innerText = 'Payment submitted. Success!';
+      } else {
+        document.getElementById('msg').innerText = 'Payment cancelled by user';
+      }
+    });
+  </script>
+</body>
+</html>

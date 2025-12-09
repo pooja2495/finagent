@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>FinAgent Dashboard</title>
+  <style>
+    body{font-family:Arial;padding:20px}
+    #log{border:1px solid #ddd;height:300px;overflow:auto;padding:8px}
+    #cmd{width:60%}
+  </style>
+</head>
+<body>
+  <h1>FinAgent Command Center</h1>
+  <p>Type a command (example: "Pay Adani Power ₹750")</p>
+  <input id="cmd" placeholder="Type command here" />
+  <button id="send">Send</button>
+
+  <h3>Live Log</h3>
+  <div id="log"></div>
+
+  <script>
+    const log = (s)=>{ const d=document.getElementById('log'); d.innerHTML += '<div>'+s+'</div>'; d.scrollTop = d.scrollHeight;}
+    document.getElementById('send').addEventListener('click', async ()=>{
+      const cmd = document.getElementById('cmd').value;
+      log('> ' + cmd);
+      // For MVP we just call backend parse endpoint (not implemented yet)
+      try{
+        const res = await fetch('/parse', {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify({command:cmd})});
+        const j = await res.json();
+        log('Parse result: ' + JSON.stringify(j));
+      }catch(e){
+        log('Error calling /parse: ' + e);
+      }
+    });
+  </script>
+</body>
+</html>

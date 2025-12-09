@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"/><title>Buy Gold</title></head>
+<body>
+  <h1>Buy Digital Gold</h1>
+  <label>Amount: ₹ <input id="amount" type="number" /></label><br/><br/>
+  <button id="buyBtn">Buy</button>
+  <div id="msg"></div>
+  <script>
+    document.getElementById('buyBtn').addEventListener('click', ()=>{
+      const amt = Number(document.getElementById('amount').value||0);
+      if(amt < 50){ document.getElementById('msg').innerText = 'Minimum ₹50'; return; }
+      if(confirm('Confirm buy ₹'+amt+' gold?')) document.getElementById('msg').innerText = 'Order placed';
+      else document.getElementById('msg').innerText = 'Cancelled';
+    });
+  </script>
+</body>
+</html>

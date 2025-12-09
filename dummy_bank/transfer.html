@@ -1,0 +1,21 @@
+<!doctype html>
+<html>
+<head><meta charset="utf-8"/><title>Transfer</title></head>
+<body>
+  <h1>Transfer Funds</h1>
+  <label>To (name): <input id="to" /></label><br/>
+  <label>Account: <input id="acc" /></label><br/>
+  <label>Amount: ₹ <input id="amount" type="number" /></label><br/><br/>
+  <button id="sendBtn">Send</button>
+  <div id="msg"></div>
+  <script>
+    document.getElementById('sendBtn').addEventListener('click', ()=>{
+      const amt = Number(document.getElementById('amount').value||0);
+      if(!document.getElementById('acc').value){ document.getElementById('msg').innerText='Enter account'; return; }
+      if(amt <= 0){ document.getElementById('msg').innerText='Enter positive amount'; return; }
+      if(confirm('Confirm transfer ₹'+amt+' to '+document.getElementById('to').value+'?')) document.getElementById('msg').innerText='Transfer submitted';
+      else document.getElementById('msg').innerText='Cancelled';
+    });
+  </script>
+</body>
+</html>
